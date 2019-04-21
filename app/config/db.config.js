@@ -16,6 +16,7 @@ db.sequelize = sequelize;
 //Models/tables
 db.usuario = require('../model/usuario.model')(sequelize, Sequelize);
 db.cliente = require('../model/cliente.model.js')(sequelize, Sequelize);
+db.oficina = require('../model/Oficina.model.js')(sequelize, Sequelize);
 
 
 db.usuario.hasOne(db.cliente)

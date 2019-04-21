@@ -4,6 +4,7 @@ var router = express.Router();
 const cors = require('cors');
 usuario = require('./app/route/usuario.route.js')(router);
 cliente = require('./app/route/cliente.route.js')(router);
+oficina = require('./app/route/oficina.route.js')(router);
 
 
 var app = express();
@@ -27,6 +28,9 @@ app.use('/api/usuario',usuario);
 app.use('/',cliente);
 app.use('/api',cliente);
 app.use('/api/cliente',cliente);
+app.use('/',oficina);
+app.use('/api',oficina);
+app.use('/api/oficina',oficina);
 
 
 module.exports = app
