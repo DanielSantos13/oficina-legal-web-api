@@ -1,5 +1,6 @@
 const db = require('../config/db.config.js');
 const Usuario = db.usuario;
+const Gestor = db.gestor;
 
 
 // Post a Customer
@@ -27,14 +28,6 @@ exports.findAll = (req, res) => {
 	});
 };
 
-// Find a Customer by Id
-exports.findByPk = (req, res) => {	
-	Usuario.findByPk(req.params.idUsuario).then(usuario => {
-		res.status(200)
-		res.send(usuario)
-	})
-	
-};
  
 // Update a Customer
 exports.update = (req, res) => {
