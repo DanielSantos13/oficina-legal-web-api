@@ -40,9 +40,14 @@ exports.update = (req, res) => {
 exports.auth = (req, res) => {
 	let password = req.body.senha;
 	let email = req.body.email;
-	Usuario.findAll({ where: { email: email } })
+	const crypto = require('crypto')
+	const alg = 'aes-256-ctr'
+	const cipher = crypto.createCipher(alg, pwd)
+  	const crypted = cipher.update(password, 'utf8', 'hex')
+	
+	  Usuario.findAll({ where: { email: email } })
 		.then(retorno => {
-			if (retorno.senha === password) {
+			if (retorno.senha === crypted) {
 				res.status(200).send("login bem sucedido");
 			}
 			else {
