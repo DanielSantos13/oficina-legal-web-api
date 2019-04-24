@@ -5,10 +5,15 @@ const Gestor = db.gestor;
 
 // Post a Customer
 exports.create = (req, res) => {
+	let password = req.body.senha;
+	const crypto = require('crypto')
+	const alg = 'aes-256-ctr'
+	const cipher = crypto.createCipher(alg, pwd)
+  	const crypted = cipher.update(password, 'utf8', 'hex')
 	// Save to MySQL database
 	Usuario.create({
 		login: req.body.login,
-		senha: req.body.senha,
+		senha: crypted,
 		email: req.body.email,
 		ativo: req.body.ativo,
 	}).then(usuario => {
