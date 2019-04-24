@@ -8,7 +8,6 @@ module.exports = function(router) {
     //retrive uma gestor por id
     router.get('/api/gestor/:idGestor' , gestor.findByPk);
 
-
     return router;
 
 }

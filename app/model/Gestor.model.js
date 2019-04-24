@@ -1,10 +1,10 @@
 module.exports = (sequelize, Sequelize) => {
     const Gestor = sequelize.define('Gestor', {
         nome:{
-            type: Sequelize.STRING
+            type: Sequelize.STRING(45)
         },
         cpf: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING(11)
         },
         idUsuario: {
             type: Sequelize.INTEGER

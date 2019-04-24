@@ -6,13 +6,5 @@ module.exports = function(router) {
     // Retrieve all Customer
     router.get('/api/cliente', cliente.findAll);
     
-    /* 
-    // Retrieve a single Customer by Id
-    router.get('/api/usuario/:idUsuario', clientefindByPk);
- 
-    // Update a Customer with Id
-    router.put('/api/usuario/:idUsuario', clienteupdate); */
-    
-
     return router;
 }

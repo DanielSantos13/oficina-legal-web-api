@@ -18,6 +18,7 @@ db.usuario = require('../model/usuario.model')(sequelize, Sequelize);
 db.cliente = require('../model/cliente.model.js')(sequelize, Sequelize);
 db.oficina = require('../model/Oficina.model.js')(sequelize, Sequelize);
 db.gestor = require('../model/Gestor.model.js')(sequelize, Sequelize);
+db.veiculo = require('../model/Veiculo.model.js')(sequelize,Sequelize)/
 
 
 db.usuario.hasOne(db.cliente,{foreignKey: 'idUsuario'})
@@ -27,6 +28,9 @@ db.usuario.hasOne(db.gestor,{foreignKey: 'idUsuario'})
 db.gestor.belongsTo(db.usuario,{foreignKey: 'idUsuario'})
 
 db.oficina.hasOne(db.gestor,{foreignKey: 'idOficina'})
-db.gestor.belongsTo(db.oficina,{foreignKey: 'idOficina'}) 
+db.gestor.belongsTo(db.oficina,{foreignKey: 'idOficina'})
+
+db.cliente.hasOne(db.veiculo, {foreignKey: 'idVeiculo'})
+db.veiculo.belongsTo(db.cliente, {foreignKey:'idVeiculo'})
  
 module.exports = db;

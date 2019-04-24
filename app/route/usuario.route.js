@@ -7,14 +7,6 @@ module.exports = function(router) {
  
     // Retrieve all Customer
     router.get('/api/usuario', usuario.findAll);
-  
-    // Retrieve a single Customer by Id
-    //router.get('/api/usuario/gestor/:login', usuario.findByLoginGestor);
- 
-    // Update a Customer with Id
-    //router.put('/api/usuario/:idUsuario', usuario.update);
- 
-    // Delete a Customer with Id
 
     return router;
 }
