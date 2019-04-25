@@ -1,7 +1,7 @@
 module.exports = function(router) {
     const usuario = require('../controller/usuario.controller.js');
  
-    router.post('/api/usuario', usuario.auth)
+    router.post('/api/login', usuario.auth)
     // Create a new Customer
     router.post('/api/usuario', usuario.create);
  

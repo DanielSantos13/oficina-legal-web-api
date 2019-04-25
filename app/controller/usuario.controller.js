@@ -1,6 +1,9 @@
 const db = require('../config/db.config.js');
 const Usuario = db.usuario;
-const Gestor = db.gestor;
+const Mecanico = db.Mecanico;
+const Cliente = db.Cliente;
+//const Admin = db.admin;
+const Gestor = db.Gestor;
 
 
 // Post a Customer
@@ -9,7 +12,7 @@ exports.create = (req, res) => {
 	const crypto = require('crypto')
 	const alg = 'aes-256-ctr'
 	const cipher = crypto.createCipher(alg, pwd)
-  	const crypted = cipher.update(password, 'utf8', 'hex')
+	const crypted = cipher.update(password, 'utf8', 'hex')
 	// Save to MySQL database
 	Usuario.create({
 		login: req.body.login,
@@ -45,15 +48,34 @@ exports.update = (req, res) => {
 exports.auth = (req, res) => {
 	let password = req.body.senha;
 	let email = req.body.email;
+	let tipo = req.body.tipo;
 	const crypto = require('crypto')
 	const alg = 'aes-256-ctr'
 	const cipher = crypto.createCipher(alg, pwd)
-  	const crypted = cipher.update(password, 'utf8', 'hex')
-	
-	  Usuario.findAll({ where: { email: email } })
+	const crypted = cipher.update(password, 'utf8', 'hex')
+
+	Usuario.findAll({ where: { email: email } })
 		.then(retorno => {
 			if (retorno.senha === crypted) {
-				res.status(200).send("login bem sucedido");
+				switch (tipo) {
+					// usuario cliente
+					case '01':
+						Cliente.findAll({ where: { idUsuario: retorno.idUsuario } }).then(output => { res.status(200).send(output) });
+						break;
+					// usuario mecanico
+					case '02':
+						Mecanico.findAll({ where: { idUsuario: retorno.idUsuario } }).then(output => { res.status(200).send(output) });
+						break;
+					// usuario gestor
+					case '03':
+						Gestor.findAll({ where: { idUsuario: retorno.idUsuario } }).then(output => { res.status(200).send(output) });
+						break;
+						// usuario admin
+					case '04':
+
+					default:
+						res.status(400).send('error!');
+				}
 			}
 			else {
 				res.status(200).send("Login ou senha incorretos!")
